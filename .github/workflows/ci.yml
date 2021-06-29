@@ -1,0 +1,24 @@
+name: build
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  build:
+    name: Configuration
+    runs-on: ubuntu-latest
+    env:
+      COVERAGE_THRESHOLD: 75
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        env:
+          FOO: ${{ secrets.FOO }}
+        run: |
+          $VALUE=$FOO 
+          echo "Value: $Value"
+
+ 
