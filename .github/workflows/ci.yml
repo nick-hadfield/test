@@ -11,14 +11,11 @@ jobs:
     env:
       COVERAGE_THRESHOLD: 75
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build
+      - name: Get Foo
         env:
           FOO: ${{ secrets.FOO }}
         run: |
-          $VALUE=$FOO 
+          VALUE=$FOO 
           echo "Value: $Value"
 
  
