@@ -24,7 +24,7 @@ jobs:
       - name: Get Foo
         env: 
           FOO: ${{ secrets[env.VARIABLE] }}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.PAT}}
         run: |
           VALUE=$FOO 
           JSON=$(echo $FOO | jq ".Foo")
