@@ -16,7 +16,8 @@ jobs:
         run: |
           VALUE=$FOO 
           JSON=$(jq "$FOO")
-          echo $JSON
+          echo "Foo - $FOO"
+          echo "Json - $JSON"
 
 
  
