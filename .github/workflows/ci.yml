@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
+      - uses: ./.github/actions/say-hello@v1
+        with:
+          name: OctoCat
 
       - name: Get Foo
         env: 
@@ -23,7 +27,8 @@ jobs:
           JSON=$(echo $FOO | jq ".Foo")
           echo "Foo - $FOO"
           echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
+          echo "Repository ${{ github.repository }}
 
 
-
+# gh secret set VERSIONS -b "{}" -R nick-hadfield/test
  

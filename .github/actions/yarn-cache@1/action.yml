@@ -1,0 +1,17 @@
+inputs:
+  name:
+    os: 'Your os'
+    default: 'No os default'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache functions node_modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: ${{ inputs.os }}-${{ hashFiles('package.json') }}-${{ hashFiles('yarn.lock') }}
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
