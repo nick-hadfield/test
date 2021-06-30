@@ -11,14 +11,16 @@ jobs:
     env:
       COVERAGE_THRESHOLD: 75
       VARIABLE: 'FOO'
-      FOO: ${{ secrets['FOO'] }}
     steps:
       - name: Get Foo
+        env: 
+          FOO: ${{ secrets['FOO'] }}
         run: |
           VALUE=$FOO 
           JSON=$(echo $FOO | jq ".Foo")
           echo "Foo - $FOO"
-          echo "Json - $JSON"
+          echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
+          
 
 
  
