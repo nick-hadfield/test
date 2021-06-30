@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_THRESHOLD: 75
+      FOO: ${{ secrets.FOO }}
     steps:
       - name: Get Foo
-        env:
-          FOO: ${{ secrets.FOO }}
         run: |
           VALUE=$FOO 
-          echo $(jq "$VALUE")
+          JSON=$(jq "$FOO")
+          echo $JSON
 
 
  
