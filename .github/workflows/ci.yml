@@ -15,7 +15,7 @@ jobs:
       - name: Get Foo
         run: |
           VALUE=$FOO 
-          JSON=$(jq "$FOO" ".Foo" -r)
+          JSON=$(echo $FOO | jq)
           echo "Foo - $FOO"
           echo "Json - $JSON"
 
