@@ -1,3 +1,5 @@
+name: set-version
+description: Set Version
 inputs:
   githubToken:
     description: 'The GITHUB_TOKEN'
@@ -31,4 +33,9 @@ runs:
           VERSION="${{github.sha}}"
         fi
         echo version: $VERSION
+      shell: bash
+    - run: |
+        JSON=${{secrets[inputs.secretName]}}
+        RESULT=$(echo $JSON | ${{ github.action_path }}/set-kvp.sh ${{inputs.name}} ${{inputs.version}})
+        echo $RESULT
       shell: bash
