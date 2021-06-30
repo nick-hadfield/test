@@ -1,0 +1,34 @@
+inputs:
+  githubToken:
+    description: 'The GITHUB_TOKEN'
+    required: true
+    default: ''
+  secretName:
+    description: 'Secret Name (default: VERSIONS)'
+    required: false
+    default: 'VERSIONS'
+  name:
+    description: 'The name of the build/module'
+    required: true
+    default: ''
+  version:
+    description: 'The version of the build/module (defaults to github.sha)'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set version
+      env: 
+        GITHUB_TOKEN: ${{inputs.githubToken}}
+      run: |
+        echo secretName: ${{ inputs.secretName }}
+        echo name: ${{ inputs.name }}
+        VERSION="${{inputs.version"
+        if [ -z $VERSION ]
+        then
+          VERSION="${{github.sha}}"
+        fi
+        echo version: $VERSION
+      shell: bash
