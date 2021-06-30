@@ -8,8 +8,6 @@ jobs:
   build:
     name: Configuration
     runs-on: ubuntu-latest
-    permissions:
-      metadata: write 
     env:
       COVERAGE_THRESHOLD: 75
       VARIABLE: 'FOO'
