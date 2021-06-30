@@ -16,7 +16,7 @@ jobs:
           FOO: ${{ secrets.FOO }}
         run: |
           VALUE=$FOO 
-          jq "$FOO"
+          echo $(jq "$FOO")
 
 
  
