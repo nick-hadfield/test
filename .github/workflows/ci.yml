@@ -17,7 +17,7 @@ jobs:
 
       - name: Get Foo
         env: 
-          FOO: ${{ secrets['FOO'] }}
+          FOO: ${{ secrets[env.FOO] }}
         run: |
           VALUE=$FOO 
           JSON=$(echo $FOO | jq ".Foo")
