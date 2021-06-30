@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COVERAGE_THRESHOLD: 75
-      FOO: ${{ secrets.FOO }}
+      VARIABLE: 'FOO'
+      FOO: ${{ secrets[env.VARIABLE] }}
     steps:
       - name: Get Foo
         run: |
