@@ -12,6 +12,9 @@ jobs:
       COVERAGE_THRESHOLD: 75
       VARIABLE: 'FOO'
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Get Foo
         env: 
           FOO: ${{ secrets['FOO'] }}
@@ -20,7 +23,7 @@ jobs:
           JSON=$(echo $FOO | jq ".Foo")
           echo "Foo - $FOO"
           echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
-          
+
 
 
  
