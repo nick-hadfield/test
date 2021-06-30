@@ -25,7 +25,7 @@ runs:
       run: |
         echo secretName: ${{ inputs.secretName }}
         echo name: ${{ inputs.name }}
-        VERSION="${{inputs.version"
+        VERSION="${{inputs.version}}"
         if [ -z $VERSION ]
         then
           VERSION="${{github.sha}}"
