@@ -28,7 +28,8 @@ jobs:
           echo "Foo - $FOO"
           echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
           echo "Repository ${{ github.repository }}"
-          gh secret set VERSIONS -b '{ "A": "B" }' -R ${{ github.repository}}
+          echo {{github.token}} | gh auth login --with-token
+          gh secret set VERSIONS -b '{ "A": "B" }' -R ${{github.repository}}
 
 
 # gh secret set VERSIONS -b "{}" -R nick-hadfield/test
