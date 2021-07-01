@@ -1,6 +1,10 @@
 name: bhp-ecr-docker-push
 description: Push a docker image to an AWS ECR Registry
 inputs:
+  ecrRegistry:
+    description: 'The aws ecr registry'
+    required: true
+    default: ''
   imageName:
     description: 'Docker image name (eg demo)'
     required: true
@@ -15,7 +19,7 @@ runs:
   steps:
     - name: Tag, and push image to Amazon ECR
       env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REGISTRY: ${{inputs.ecrRegistry}}
         IMAGE_NAME: ${{inputs.imageName}}
         IMAGE_TAG: ${{inputs.imageTag}}
       shell: bash

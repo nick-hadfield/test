@@ -38,6 +38,7 @@ jobs:
       - name: Push docker image
         uses: ./.github/actions/bhp-ecr-docker-push
         with:
+          ecrRegistry: ${{ steps.login-ecr.outputs.registry }}
           imageName: avalier/helloworld
           imageTag: ${{github.sha}}  
 
