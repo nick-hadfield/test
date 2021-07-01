@@ -15,9 +15,39 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - uses: ./.github/actions/say-hello@v1
+      - name: Say hello
+        uses: ./.github/actions/say-hello@v1
         with:
           name: OctoCat
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker pull avalier/helloworld
+
+          # Label using sha #
+          echo "Pushing $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}..."
+          docker tag avalier/helloworld $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}
+          docker push $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}
+
+          # Label using dev #
+          echo "Pushing $ECR_REPOSITORY/bhp/helloworld:dev..."
+          docker tag avalier/helloworld $ECR_REPOSITORY/bhp/helloworld:dev
+          docker push $ECR_REPOSITORY/bhp/helloworld:dev
+          
 
       #- name: Get Foo
       #  env: 
