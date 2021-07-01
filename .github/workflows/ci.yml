@@ -37,15 +37,16 @@ jobs:
           IMAGE_NAME: avalier/helloworld
           IMAGE_TAG: ${{github.sha}}
         run: |
-          docker pull $IMAGE_NAME
 
           # Create/upsert the "repository" if it doesnt exist in the ECR registry //
-          RESULT=$(aws ecr describe-repositories | jq -r '.repositories | map(select(.repositoryName == "$IMAGE_NAME"))[].repositoryName')
+          RESULT=$(aws ecr describe-repositories | jq -r ".repositories | map(select(.repositoryName == \"$IMAGE_NAME\"))[].repositoryName")
           echo "Result: $RESULT"
           if [ -z $RESULT ]
           then
             aws ecr create-repository --repository-name $IMAGE_NAME
           fi
+          
+          docker pull $IMAGE_NAME
 
           # Label using sha #
           echo "Pushing $ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG..."
