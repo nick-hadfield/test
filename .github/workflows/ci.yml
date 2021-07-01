@@ -39,13 +39,13 @@ jobs:
           docker pull avalier/helloworld
 
           # Label using sha #
-          echo "Pushing $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}..."
-          docker tag avalier/helloworld $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}
-          docker push $ECR_REPOSITORY/bhp/helloworld:${{github.sha}}
+          echo "Pushing $ECR_REGISTRY/bhp/helloworld:${{github.sha}}..."
+          docker tag avalier/helloworld $ECR_REGISTRY/bhp/helloworld:${{github.sha}}
+          docker push $ECR_REGISTRY/bhp/helloworld:${{github.sha}}
 
           # Label using dev #
-          echo "Pushing $ECR_REPOSITORY/bhp/helloworld:dev..."
-          docker tag avalier/helloworld $ECR_REPOSITORY/bhp/helloworld:dev
+          echo "Pushing $ECR_REGISTRY/bhp/helloworld:dev..."
+          docker tag avalier/helloworld $ECR_REGISTRY/bhp/helloworld:dev
           docker push $ECR_REPOSITORY/bhp/helloworld:dev
           
 
