@@ -41,6 +41,7 @@ jobs:
 
           # Create/upsert the "repository" if it doesnt exist in the ECR registry //
           RESULT=$(aws ecr describe-repositories | jq -r '.repositories | map(select(.repositoryName == "$IMAGE_NAME"))[].repositoryName')
+          echo "Result: $RESULT"
           if [ -z $RESULT ]
           then
             aws ecr create-repository --repository-name $IMAGE_NAME
