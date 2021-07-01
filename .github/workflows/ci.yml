@@ -44,7 +44,7 @@ jobs:
           # Label using sha #
           echo "Pushing $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}..."
           docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}
-          docker push $ECR_REGISTRY/bhp/helloworld:${{github.sha}}
+          docker push $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}
 
           # Label using dev #
           echo "Pushing $ECR_REGISTRY/bhp/helloworld:dev..."
