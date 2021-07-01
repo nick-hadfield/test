@@ -33,19 +33,22 @@ jobs:
 
       - name: Tag, and push image to Amazon ECR
         env:
-          ECR_REGISTRY: ${{ secrets.AWS_DOCKER_REGISTRY }}
-          IMAGE_TAG: ${{ github.sha }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME: avalier/helloworld
         run: |
-          docker pull avalier/helloworld
+          docker pull $IMAGE_NAME
+
+          // Upsert the "repository" within the ECR registry //
+          aws ecr describe-repositories --repository-names $IMAGE_NAME || aws ecr create-repository --repository-name $IMAGE_NAME
 
           # Label using sha #
-          echo "Pushing $ECR_REGISTRY/bhp/helloworld:${{github.sha}}..."
-          docker tag avalier/helloworld $ECR_REGISTRY/bhp/helloworld:${{github.sha}}
+          echo "Pushing $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}..."
+          docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}
           docker push $ECR_REGISTRY/bhp/helloworld:${{github.sha}}
 
           # Label using dev #
           echo "Pushing $ECR_REGISTRY/bhp/helloworld:dev..."
-          docker tag avalier/helloworld $ECR_REGISTRY/bhp/helloworld:dev
+          docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:dev
           docker push $ECR_REPOSITORY/bhp/helloworld:dev
           
 
