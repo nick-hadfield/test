@@ -38,7 +38,7 @@ jobs:
         run: |
           docker pull $IMAGE_NAME
 
-          // Upsert the "repository" within the ECR registry //
+          # Upsert the "repository" within the ECR registry #
           aws ecr describe-repositories --repository-names $IMAGE_NAME || aws ecr create-repository --repository-name $IMAGE_NAME
 
           # Label using sha #
