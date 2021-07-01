@@ -28,7 +28,7 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Push docker image
-        uses: ./.github/action/bhp-ecr-docker-push
+        uses: ./.github/actions/bhp-ecr-docker-push
         env:
           imageName: avalier/helloworld
           imageTag: ${{github.sha}}  
