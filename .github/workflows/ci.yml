@@ -35,22 +35,20 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_NAME: avalier/helloworld
+          IMAGE_TAG: ${{github.sha}}
         run: |
           docker pull $IMAGE_NAME
 
-          # Upsert the "repository" within the ECR registry #
-          aws ecr describe-repositories --repository-names $IMAGE_NAME || aws ecr create-repository --repository-name $IMAGE_NAME
+          # Create/upsert the "repository" if it doesnt exist in the ECR registry //
+          if [ -z $(aws ecr describe-repositories | jq -r '.repositories | map(select(.repositoryName == "$IMAGE_NAME"))[].repositoryName') ]
+          then
+            aws ecr create-repository --repository-name $IMAGE_NAME
+          fi
 
           # Label using sha #
-          echo "Pushing $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}..."
-          docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}
-          docker push $ECR_REGISTRY/$IMAGE_NAME:${{github.sha}}
-
-          # Label using dev #
-          echo "Pushing $ECR_REGISTRY/bhp/helloworld:dev..."
-          docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:dev
-          docker push $ECR_REPOSITORY/bhp/helloworld:dev
-          
+          echo "Pushing $ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG..."
+          docker tag $IMAGE_NAME $ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
 
       #- name: Get Foo
       #  env: 
