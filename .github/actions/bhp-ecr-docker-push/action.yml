@@ -19,6 +19,7 @@ runs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_NAME: ${{inputs.imageName}}
         IMAGE_TAG: ${{inputs.imageTag}}
+      shell: bash
       run: |
 
         # Create/upsert the "repository" if it doesnt exist in the ECR registry //

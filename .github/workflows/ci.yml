@@ -31,6 +31,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Pull image
+        run: |
+          docker pull avalier/helloworld
+
       - name: Push docker image
         uses: ./.github/actions/bhp-ecr-docker-push
         env:
