@@ -19,22 +19,22 @@ jobs:
         with:
           name: OctoCat
 
-      - name: Get Foo
-        env: 
-          FOO: ${{ secrets[env.VARIABLE] }}
-          GITHUB_TOKEN: ${{secrets.PAT}}
-        run: |
-          VALUE=$FOO 
-          JSON=$(echo $FOO | jq ".Foo")
-          echo "Foo - $FOO"
-          echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
-          echo "Repository ${{ github.repository }}"
-          gh secret set VERSIONS -b '{ "A": "B" }' -R ${{github.repository}}
-      - name: Set version
-        uses: ./.github/actions/set-version@v1
-        with:
-          githubToken: ${{secrets.PAT}}
-          name: "test"
+      #- name: Get Foo
+      #  env: 
+      #    FOO: ${{ secrets[env.VARIABLE] }}
+      #    GITHUB_TOKEN: ${{secrets.PAT}}
+      #  run: |
+      #    VALUE=$FOO 
+      3    JSON=$(echo $FOO | jq ".Foo")
+      #    echo "Foo - $FOO"
+      #    echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
+      #    echo "Repository ${{ github.repository }}"
+      #    gh secret set VERSIONS -b '{ "A": "B" }' -R ${{github.repository}}
+      #- name: Set version
+      #  uses: ./.github/actions/set-version@v1
+      #  with:
+      #    githubToken: ${{secrets.PAT}}
+      #    name: "test"
 
 
 
