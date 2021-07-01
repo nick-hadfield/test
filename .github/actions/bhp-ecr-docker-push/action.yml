@@ -13,7 +13,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-  
     - name: Tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}

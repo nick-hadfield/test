@@ -37,7 +37,7 @@ jobs:
 
       - name: Push docker image
         uses: ./.github/actions/bhp-ecr-docker-push
-        env:
+        with:
           imageName: avalier/helloworld
           imageTag: ${{github.sha}}  
 
