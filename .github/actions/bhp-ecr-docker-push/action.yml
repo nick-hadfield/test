@@ -6,7 +6,7 @@ inputs:
     required: true
     default: ''
   imageTag:
-    description: 'Docker image tag (eg latest)''
+    description: 'Docker image tag (eg latest)'
     required: false
     default: 'latest'
 
@@ -16,7 +16,7 @@ runs:
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
-      
+
     - name: Tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
