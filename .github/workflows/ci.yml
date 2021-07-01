@@ -25,7 +25,7 @@ jobs:
       #    GITHUB_TOKEN: ${{secrets.PAT}}
       #  run: |
       #    VALUE=$FOO 
-      3    JSON=$(echo $FOO | jq ".Foo")
+      #    JSON=$(echo $FOO | jq ".Foo")
       #    echo "Foo - $FOO"
       #    echo $(echo $FOO | ./bin/set-kvp.sh "Hello" "World")
       #    echo "Repository ${{ github.repository }}"
